@@ -1,1 +1,1 @@
-# PyInventoryCSV
+# PyInvCSV

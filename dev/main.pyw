@@ -52,7 +52,7 @@ def main():
     root.minsize(850, 500)
 
     # Set window title
-    root.title("PyInventory - Menú Principal")
+    root.title("Librería N-Cosas - Menú Principal")
 
     # Set BG
     root.configure(bg=BG_COLOR)
@@ -63,7 +63,7 @@ def main():
 
     # Title
     title_font = ("Arial", 20, "bold")
-    title = tk.Label(frame, text="PyInventory", font=title_font, bg=BG_COLOR, fg=TXT_COLOR)
+    title = tk.Label(frame, text="Librería N-Cosas", font=title_font, bg=BG_COLOR, fg=TXT_COLOR)
     title.grid(row=0, column=0, columnspan=5, pady=5)
 
     #Subtitle
@@ -91,7 +91,7 @@ def main():
       widget.destroy()
     
     # Set window title
-    root.title("PyInventory - Menú Principal")
+    root.title("Librería N-Cosas - Menú Principal")
 
     # Set BG
     root.configure(bg=BG_COLOR)
@@ -102,7 +102,7 @@ def main():
 
     # Title
     title_font = ("Arial", 20, "bold")
-    title = tk.Label(frame, text="PyInventory", font=title_font, bg=BG_COLOR, fg=TXT_COLOR)
+    title = tk.Label(frame, text="Librería N-Cosas", font=title_font, bg=BG_COLOR, fg=TXT_COLOR)
     title.grid(row=0, column=0, columnspan=5, pady=5)
 
     #Subtitle

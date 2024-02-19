@@ -1,5 +1,5 @@
-### SSTools4MC Program Loader and Updater ###
-# This script is the main program loader and updater for SSTools4MC.
+### PyInventory Program Loader and Updater ###
+# This script is the main program loader and updater for PyInventory.
 # It will check for updates and download them if needed.
 
 # MODULES
@@ -31,14 +31,17 @@ def main():
     # Call check_internet_connection function
     if check_internet_connection():
         # GitHub URL
-        file_url = "https://raw.githubusercontent.com/tu_usuario/tu_repositorio/master/programa.py"
+        file_url = "https://raw.githubusercontent.com/ngdplnk/PyInventory/main/Release/main.pyw"
         
+        # Get the program files path
+        program_files_path = os.environ.get("APPDATA")
+
         # Install path
-        install_path = os.path.join("program files", "TLSoftware")
+        install_path = os.path.join(program_files_path, "TLSoftware")
         os.makedirs(install_path, exist_ok=True)
         
         # File name
-        file_name = os.path.join(install_path, "programa.py")
+        file_name = os.path.join(install_path, "main.pyw")
         
         # Download file from GitHub
         download_file(file_url, file_name)
@@ -46,10 +49,18 @@ def main():
         # Run the program
         os.system(f"python {file_name}")
     else:
+        # Get the program files path
+        program_files_path = os.environ.get("APPDATA")
+
+        # Install path
+        install_path = os.path.join(program_files_path, "TLSoftware")
+        
+        # File name
+        file_name = os.path.join(install_path, "main.pyw")
         # Verify if the program is installed
-        if os.path.exists("program files/TLSoftware/programa.py"):
+        if os.path.exists(file_name):
             # Run the program
-            os.system("python program\ files/TLSoftware/programa.py")
+            os.system(f"python {file_name}")
         else:
             # Show error message
             messagebox.showerror("Error", "El programa no está instalado en este equipo. Por favor, conéctate a internet para obtener la última versión disponible.")

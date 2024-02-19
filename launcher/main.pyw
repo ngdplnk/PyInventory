@@ -1,13 +1,18 @@
-### PyInventory Program Loader and Updater ###
-# This script is the main program loader and updater for PyInventory.
-# It will check for updates and download them if needed.
+######################################## PyInventory Launcher #######################################
+################ This script is the main program loader and updater for PyInventory. ################
+############# It will update the program from GitHub if there is an internet connection. ############
+### If there is no internet connection, it will run the program with the latest version available. ##
+################## If the program is not installed, it will show an error message. ##################
+#####################################################################################################
 
 # MODULES
 import os
-import sys
 import requests
 import subprocess
 from tkinter import messagebox
+
+# APPDATA PATH
+APPDATA = os.environ.get("APPDATA")
 
 # Check internet connection
 def check_internet_connection():
@@ -26,14 +31,9 @@ def download_file(url, destination):
     except Exception as e:
         print("Error:", e)
         messagebox.showerror("Error", "Error al actualizar. Intentando usar versión local del programa.")
-        # Get the program files path
-        program_files_path = os.environ.get("APPDATA")
 
-        # Install path
-        install_path = os.path.join(program_files_path, "TLSoftware")
-        
-        # File name
-        file_name = os.path.join(install_path, "main.pyw")
+        # File path
+        file_name = os.path.join(APPDATA, "TLSoftware", "PyInventory", "main.pyw")
         
         # Verify if the program is installed
         if os.path.exists(file_name):
@@ -49,18 +49,14 @@ def main():
     # Call check_internet_connection function
     if check_internet_connection():
         # GitHub URL
-        file_url = "https://raw.githubusercontent.com/ngdplnk/PyInventory/main/Release/main.pyw"
-        
-        # Get the program files path
-        program_files_path = os.environ.get("APPDATA")
+        file_url = "https://raw.githubusercontent.com/ngdplnk/PyInventory/main/release/main.pyw"
 
-        # Install path
-        install_path = os.path.join(program_files_path, "TLSoftware")
-        os.makedirs(install_path, exist_ok=True)
+        # Install path and file name
+        file_name = os.path.join(APPDATA, "TLSoftware", "PyInventory")
+        os.makedirs(file_name, exist_ok=True)
         
-        # File name
-        file_name = os.path.join(install_path, "main.pyw")
-        
+        file_name = os.path.join(file_name, "main.pyw")
+
         # Download file from GitHub
         download_file(file_url, file_name)
         
@@ -70,11 +66,8 @@ def main():
         # Get the program files path
         program_files_path = os.environ.get("APPDATA")
 
-        # Install path
-        install_path = os.path.join(program_files_path, "TLSoftware")
-        
-        # File name
-        file_name = os.path.join(install_path, "main.pyw")
+        # File path
+        file_name = os.path.join(APPDATA, "TLSoftware", "PyInventory", "main.pyw")
 
         # Verify if the program is installed
         if os.path.exists(file_name):

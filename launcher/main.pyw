@@ -29,7 +29,6 @@ def download_file(url, destination):
         with open(destination, 'wb') as file:
             file.write(response.content)
     except Exception as e:
-        print("Error:", e)
         messagebox.showerror("Error", "Error al actualizar. Intentando usar versión local del programa.")
 
         # File path
@@ -52,10 +51,10 @@ def main():
         file_url = "https://raw.githubusercontent.com/ngdplnk/PyInventory/main/release/main.pyw"
 
         # Install path and file name
-        file_name = os.path.join(APPDATA, "TLSoftware", "PyInventory")
-        os.makedirs(file_name, exist_ok=True)
+        install_name = os.path.join(APPDATA, "TLSoftware", "PyInventory")
+        os.makedirs(install_name, exist_ok=True)
         
-        file_name = os.path.join(file_name, "main.pyw")
+        file_name = os.path.join(install_name, "main.pyw")
 
         # Download file from GitHub
         download_file(file_url, file_name)

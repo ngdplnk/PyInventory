@@ -46,7 +46,7 @@ def main():
     root = tk.Tk()
     root.state("zoomed")
     try:
-      root.iconbitmap("assets\\icon.ico")
+      root.iconbitmap(os.path.join(APPPATH, "assets", "icon.ico"))
     except tk.TclError:
       pass
     root.minsize(850, 500)

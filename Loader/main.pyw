@@ -6,6 +6,7 @@
 import os
 import sys
 import requests
+import subprocess
 from tkinter import messagebox
 
 # Check internet connection
@@ -24,7 +25,24 @@ def download_file(url, destination):
             file.write(response.content)
     except Exception as e:
         print("Error:", e)
-        messagebox.showerror("Error", "Error al actualizar. Usando versión local del programa.")
+        messagebox.showerror("Error", "Error al actualizar. Intentando usar versión local del programa.")
+        # Get the program files path
+        program_files_path = os.environ.get("APPDATA")
+
+        # Install path
+        install_path = os.path.join(program_files_path, "TLSoftware")
+        
+        # File name
+        file_name = os.path.join(install_path, "main.pyw")
+        
+        # Verify if the program is installed
+        if os.path.exists(file_name):
+            # Run the program
+            subprocess.run(["python", file_name], check=True)
+        else:
+            # Show error message
+            messagebox.showerror("Error", "El programa no está instalado en este equipo. Por favor, conéctate a internet para obtener la última versión disponible.")
+
 
 # Main function
 def main():
@@ -47,7 +65,7 @@ def main():
         download_file(file_url, file_name)
         
         # Run the program
-        os.system(f"python {file_name}")
+        subprocess.run(["python", file_name], check=True)
     else:
         # Get the program files path
         program_files_path = os.environ.get("APPDATA")
@@ -57,10 +75,11 @@ def main():
         
         # File name
         file_name = os.path.join(install_path, "main.pyw")
+
         # Verify if the program is installed
         if os.path.exists(file_name):
             # Run the program
-            os.system(f"python {file_name}")
+            subprocess.run(["python", file_name], check=True)
         else:
             # Show error message
             messagebox.showerror("Error", "El programa no está instalado en este equipo. Por favor, conéctate a internet para obtener la última versión disponible.")

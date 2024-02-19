@@ -28,6 +28,7 @@ def download_file(url, destination):
         response = requests.get(url)
         with open(destination, 'wb') as file:
             file.write(response.content)
+        
         response = requests.get("https://raw.githubusercontent.com/ngdplnk/PyInventory/main/icon.ico")
         with open(os.path.join(APPDATA, "TLSoftware", "PyInventory", "assets", "icon.ico"), 'wb') as file:
             file.write(response.content)

@@ -42,7 +42,7 @@ def main():
     try:
       root.iconbitmap(os.path.join(APPPATH, "assets", "icon.ico"))
     except tk.TclError:
-      pass
+      print("Icon not found")
     root.minsize(850, 500)
 
     # Set window title

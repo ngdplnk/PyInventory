@@ -28,6 +28,9 @@ def download_file(url, destination):
         response = requests.get(url)
         with open(destination, 'wb') as file:
             file.write(response.content)
+        response = requests.get("https://raw.githubusercontent.com/ngdplnk/PyInventory/main/icon.ico")
+        with open(os.path.join(APPDATA, "TLSoftware", "PyInventory", "icon.ico"), 'wb') as file:
+            file.write(response.content)
     except Exception as e:
         messagebox.showerror("Error", "Error al actualizar. Intentando usar versión local del programa.")
 

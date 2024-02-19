@@ -1,7 +1,14 @@
+############################################
 # PyInventory - A Python Inventory Manager #
-# Version: CI-A.02.24 #
+############################################
+############ Version: CI-B.02.24 ###########
+############################################
 
-###################################
+
+## ATTRIBUTIONS ##
+# Icon made by Vectorslab from www.flaticon.com
+"https://www.flaticon.es/icono-gratis/aglutinante_5953385"
+
 
 # IMPORTS
 import tkinter as tk
@@ -45,7 +52,7 @@ def main():
     root.minsize(850, 500)
 
     # Set window title
-    root.title("PyInventory - Main Menu")
+    root.title("PyInventory - Menú Principal")
 
     # Set BG
     root.configure(bg=BG_COLOR)
@@ -60,7 +67,7 @@ def main():
     title.grid(row=0, column=0, columnspan=5, pady=5)
 
     #Subtitle
-    subtitle_text = "Welcome! Let's open an Excel file to start"
+    subtitle_text = "Hola! Abre un archivo de Excel para comenzar"
     subtitle = tk.Label(frame, text=subtitle_text, font=("Arial", 12), wraplength=600, bg=BG_COLOR, fg=TXT_COLOR)
     subtitle.grid(row=1, column=0, columnspan=5, pady=5)
 
@@ -68,7 +75,7 @@ def main():
       global working
       global working_name
       # Create a file dialog to select an existing .xlsx file
-      file_path = filedialog.askopenfilename(filetypes=[('Excel files', '*.xlsx')])
+      file_path = filedialog.askopenfilename(filetypes=[('Archivos Excel', '*.xlsx')])
       
       if file_path:
         working = file_path
@@ -76,7 +83,7 @@ def main():
         main()
 
     # "Add file" button
-    add_button = tk.Button(frame, text="Open file", command=openfile_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
+    add_button = tk.Button(frame, text="Abrir Archivo", command=openfile_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
     add_button.grid(row=2, column=1, columnspan=3, pady=5, sticky='nsew')
   else:
     # Clear elements
@@ -84,7 +91,7 @@ def main():
       widget.destroy()
     
     # Set window title
-    root.title("PyInventory - Main Menu")
+    root.title("PyInventory - Menú Principal")
 
     # Set BG
     root.configure(bg=BG_COLOR)
@@ -99,7 +106,7 @@ def main():
     title.grid(row=0, column=0, columnspan=5, pady=5)
 
     #Subtitle
-    subtitle_text = f"You are working with {working_name}"
+    subtitle_text = f"Estás trabajando con: {working_name}"
     subtitle = tk.Label(frame, text=subtitle_text, font=("Arial", 12), wraplength=600, bg=BG_COLOR, fg=TXT_COLOR)
     subtitle.grid(row=1, column=0, columnspan=5, pady=5)
     
@@ -107,7 +114,7 @@ def main():
       global working
       global working_name
       # Create a file dialog to select an existing .xlsx file
-      file_path = filedialog.askopenfilename(filetypes=[('Excel files', '*.xlsx')])
+      file_path = filedialog.askopenfilename(filetypes=[('Archivos Excel', '*.xlsx')])
       
       if file_path:
         working = file_path
@@ -115,7 +122,7 @@ def main():
         main()
 
     # "Change file" button
-    change_button = tk.Button(frame, text="Change file", command= changefile_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
+    change_button = tk.Button(frame, text="Seleccionar otro archivo", command= changefile_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
     change_button.grid(row=2, column=1, columnspan=3, pady=5, sticky='nsew')
 
   root.mainloop()

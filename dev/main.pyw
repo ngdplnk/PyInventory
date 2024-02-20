@@ -31,6 +31,24 @@ working_name = None
 # GET APP PATH
 APPPATH = os.path.join(os.getenv("APPDATA"), "TLSoftware", "PyInventory")
 
+# THEME CHANGING FUNCTION
+def change_theme():
+  global BG_COLOR
+  global TXT_COLOR
+  global BTNTXT_COLOR
+  global BUTTON_COLOR
+  if BG_COLOR == "#3F88C5":
+    BG_COLOR = "#1A1A1A"
+    TXT_COLOR = "#FFFFFF"
+    BTNTXT_COLOR = "#FFFFFF"
+    BUTTON_COLOR = "#1A1A1A"
+  else:
+    BG_COLOR = "#3F88C5"
+    TXT_COLOR = "#FFFFFF"
+    BTNTXT_COLOR = "#000000"
+    BUTTON_COLOR = "#FFFFFF"
+  main()
+
 # CONSULT MENU
 def consult_menu():
   global working
@@ -230,64 +248,122 @@ def main():
         working_name = os.path.basename(working)
         main()
 
-    # "Add file" button
+    # "Abrir Archivo" button
     add_button = tk.Button(frame, text="Abrir Archivo", command=openfile_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
     add_button.grid(row=2, column=1, columnspan=3, pady=5, sticky='nsew')
-  else:
-    # Clear elements
-    for widget in root.winfo_children():
-      widget.destroy()
-    
-    # Set window title
-    root.title("Librería N-Cosas - Menú Principal")
 
-    # Set BG
-    root.configure(bg=BG_COLOR)
-
-    # Main frame
-    frame = tk.Frame(root, bg=BG_COLOR)
-    frame.place(relx=0.5, rely=0.5, anchor='center')
-
-    # Title
-    title_font = ("Arial", 20, "bold")
-    title = tk.Label(frame, text="Librería N-Cosas", font=title_font, bg=BG_COLOR, fg=TXT_COLOR)
-    title.grid(row=0, column=0, columnspan=5, pady=5)
-
-    #Subtitle
-    subtitle_text = f"Estás trabajando con: {working_name}"
-    subtitle = tk.Label(frame, text=subtitle_text, font=("Arial", 12), wraplength=600, bg=BG_COLOR, fg=TXT_COLOR)
-    subtitle.grid(row=1, column=0, columnspan=5, pady=5)
-    
-    def changefile_menu():
-      global working
-      global working_name
-      # Create a file dialog to select an existing .xlsx file
-      file_path = filedialog.askopenfilename(filetypes=[('Archivos Excel', '*.xlsx')])
-      
-      if file_path:
-        working = file_path
-        working_name = os.path.basename(working)
-        main()
-
-    # "Consulta de productos" button
-    consult_button = tk.Button(frame, text="Consulta de productos", command=consult_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
-    consult_button.grid(row=2, column=1, columnspan=3, pady=5, sticky='nsew')
-
-    # "Agregar productos" button
-    add_button = tk.Button(frame, text="Agregar productos", command=add_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
-    add_button.grid(row=3, column=1, columnspan=3, pady=5, sticky='nsew')
-
-    # "Eliminar productos" button
-    delete_button = tk.Button(frame, text="Eliminar productos", command=delete_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
-    delete_button.grid(row=4, column=1, columnspan=3, pady=5, sticky='nsew')
-
-    # "Abrir otro archivo" button
-    change_button = tk.Button(frame, text="Abrir otro archivo", command=changefile_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
-    change_button.grid(row=5, column=1, columnspan=3, pady=5, sticky='nsew')
+    # "Cambiar Tema" button
+    change_button = tk.Button(frame, text="Cambiar Tema", command=change_theme, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
+    change_button.grid(row=3, column=1, columnspan=3, pady=5, sticky='nsew')
 
     # "Salir" button
     exit_button = tk.Button(frame, text="Salir", command=exit_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
-    exit_button.grid(row=6, column=1, columnspan=3, pady=5, sticky='nsew')
+    exit_button.grid(row=4, column=1, columnspan=3, pady=5, sticky='nsew')
+
+  else:
+    if working == None:
+      # Clear elements
+      for widget in root.winfo_children():
+        widget.destroy()
+      
+      # Set window title
+      root.title("Librería N-Cosas - Menú Principal")
+
+      # Set BG
+      root.configure(bg=BG_COLOR)
+
+      # Main frame
+      frame = tk.Frame(root, bg=BG_COLOR)
+      frame.place(relx=0.5, rely=0.5, anchor='center')
+
+      # Title
+      title_font = ("Arial", 20, "bold")
+      title = tk.Label(frame, text="Librería N-Cosas", font=title_font, bg=BG_COLOR, fg=TXT_COLOR)
+      title.grid(row=0, column=0, columnspan=5, pady=5)
+
+      #Subtitle
+      subtitle_text = "Hola! Abre un archivo de Excel para comenzar"
+      subtitle = tk.Label(frame, text=subtitle_text, font=("Arial", 12), wraplength=600, bg=BG_COLOR, fg=TXT_COLOR)
+      subtitle.grid(row=1, column=0, columnspan=5, pady=5)
+
+      def openfile_menu():
+        global working
+        global working_name
+        # Create a file dialog to select an existing .xlsx file
+        file_path = filedialog.askopenfilename(filetypes=[('Archivos Excel', '*.xlsx')])
+        
+        if file_path:
+          working = file_path
+          working_name = os.path.basename(working)
+          main()
+      
+      # "Abrir Archivo" button
+      add_button = tk.Button(frame, text="Abrir Archivo", command=openfile_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
+      add_button.grid(row=2, column=1, columnspan=3, pady=5, sticky='nsew')
+      
+      # "Cambiar Tema" button
+      change_button = tk.Button(frame, text="Cambiar Tema", command=change_theme, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
+      change_button.grid(row=3, column=1, columnspan=3, pady=5, sticky='nsew')
+
+      # "Salir" button
+      exit_button = tk.Button(frame, text="Salir", command=exit_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
+      exit_button.grid(row=4, column=1, columnspan=3, pady=5, sticky='nsew')
+
+    else:
+      # Clear elements
+      for widget in root.winfo_children():
+        widget.destroy()
+      
+      # Set window title
+      root.title("Librería N-Cosas - Menú Principal")
+
+      # Set BG
+      root.configure(bg=BG_COLOR)
+
+      # Main frame
+      frame = tk.Frame(root, bg=BG_COLOR)
+      frame.place(relx=0.5, rely=0.5, anchor='center')
+
+      # Title
+      title_font = ("Arial", 20, "bold")
+      title = tk.Label(frame, text="Librería N-Cosas", font=title_font, bg=BG_COLOR, fg=TXT_COLOR)
+      title.grid(row=0, column=0, columnspan=5, pady=5)
+
+      #Subtitle
+      subtitle_text = f"Estás trabajando con: {working_name}"
+      subtitle = tk.Label(frame, text=subtitle_text, font=("Arial", 12), wraplength=600, bg=BG_COLOR, fg=TXT_COLOR)
+      subtitle.grid(row=1, column=0, columnspan=5, pady=5)
+      
+      def changefile_menu():
+        global working
+        global working_name
+        # Create a file dialog to select an existing .xlsx file
+        file_path = filedialog.askopenfilename(filetypes=[('Archivos Excel', '*.xlsx')])
+        
+        if file_path:
+          working = file_path
+          working_name = os.path.basename(working)
+          main()
+
+      # "Consulta de productos" button
+      consult_button = tk.Button(frame, text="Consulta de productos", command=consult_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
+      consult_button.grid(row=2, column=1, columnspan=3, pady=5, sticky='nsew')
+
+      # "Agregar productos" button
+      add_button = tk.Button(frame, text="Agregar productos", command=add_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
+      add_button.grid(row=3, column=1, columnspan=3, pady=5, sticky='nsew')
+
+      # "Eliminar productos" button
+      delete_button = tk.Button(frame, text="Eliminar productos", command=delete_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
+      delete_button.grid(row=4, column=1, columnspan=3, pady=5, sticky='nsew')
+
+      # "Abrir otro archivo" button
+      change_button = tk.Button(frame, text="Abrir otro archivo", command=changefile_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
+      change_button.grid(row=5, column=1, columnspan=3, pady=5, sticky='nsew')
+
+      # "Salir" button
+      exit_button = tk.Button(frame, text="Salir", command=exit_menu, height=3, width=20, bg=BUTTON_COLOR, fg=BTNTXT_COLOR)
+      exit_button.grid(row=6, column=1, columnspan=3, pady=5, sticky='nsew')
 
 
   root.mainloop()

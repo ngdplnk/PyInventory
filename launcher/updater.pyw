@@ -17,8 +17,16 @@ def check_internet_connection():
     
 # MODULE INSTALLER
 def install_module(module):
+    # Create a STARTUPINFO object
+    startupinfo = subprocess.STARTUPINFO()
+
+    # Set the use show window flag
+    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+
+    # Set the window show state to hidden
+    startupinfo.wShowWindow = subprocess.SW_HIDE
     try:
-        subprocess.run(["pip", "install", module], shell=False)
+        subprocess.run(["pip", "install", module], startupinfo=startupinfo, shell=False)
     except subprocess.CalledProcessError:
         messagebox.showerror("Error", "Error al instalar módulo. Intentando usar módulo ya instalado.")
 
@@ -48,17 +56,22 @@ def download_file(url, destination):
         
         # Verify if the program is installed
         if os.path.exists(file_name):
+            # Create a STARTUPINFO object
+            startupinfo = subprocess.STARTUPINFO()
+
+            # Set the use show window flag
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+
+            # Set the window show state to hidden
+            startupinfo.wShowWindow = subprocess.SW_HIDE
+
             # Run the program
-            subprocess.run(["python", file_name], check=True, shell=False)
+            subprocess.run(["python", file_name], startupinfo=startupinfo, check=True, shell=False)
         else:
             # Show error message
             messagebox.showerror("Error", "El programa no está instalado en este equipo. Por favor, conéctate a internet para obtener la última versión disponible.")
 
 # Check modules
-if not is_module_installed("requests"):
-    requests_module = False
-else:
-    requests_module = True
 if not is_module_installed("openpyxl"):
     openpyxl_module = False
 else:
@@ -83,18 +96,25 @@ if check_internet_connection():
     download_file(file_url, file_name)
 
     # Install modules
-    if not requests_module:
-        install_module("requests")
     if not openpyxl_module:
         install_module("openpyxl")
     if not pandas_module:
         install_module("pandas")
-        
+    
+    # Create a STARTUPINFO object
+    startupinfo = subprocess.STARTUPINFO()
+
+    # Set the use show window flag
+    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+
+    # Set the window show state to hidden
+    startupinfo.wShowWindow = subprocess.SW_HIDE
+
     # Run the program
-    subprocess.run(["python", file_name], check=True, shell=False)
+    subprocess.run(["python", file_name], startupinfo=startupinfo, check=True, shell=False)
 else:
     # Check if all the modules are installed
-    if not requests_module or not openpyxl_module or not pandas_module:
+    if not openpyxl_module or not pandas_module:
         messagebox.showerror("Error", "No tienes acceso a internet y no tienes instalados los módulos necesarios. Por favor, conéctate a internet y reinicia el programa.")
     else:
         # File path
@@ -102,8 +122,17 @@ else:
 
         # Verify if the program is installed
         if os.path.exists(file_name):
+            # Create a STARTUPINFO object
+            startupinfo = subprocess.STARTUPINFO()
+
+            # Set the use show window flag
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+
+            # Set the window show state to hidden
+            startupinfo.wShowWindow = subprocess.SW_HIDE
+
             # Run the program
-            subprocess.run(["python", file_name], check=True, shell=False)
+            subprocess.run(["python", file_name], startupinfo=startupinfo, check=True, shell=False)
         else:
             # Show error message
             messagebox.showerror("Error", "El programa no está instalado en este equipo. Por favor, conéctate a internet para obtener la última versión disponible.")

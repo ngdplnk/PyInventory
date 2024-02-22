@@ -24,13 +24,32 @@ def download_file(url, destination):
         
         updater_path = os.path.join(APPDATA, "TLSoftware", "PyInventory", "scripts", "updater.pyw")
         if os.path.exists(updater_path):
-            subprocess.run(["python", updater_path], check=True, shell=False)
+            # Create a STARTUPINFO object
+            startupinfo = subprocess.STARTUPINFO()
+
+            # Set the use show window flag
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+
+            # Set the window show state to hidden
+            startupinfo.wShowWindow = subprocess.SW_HIDE
+            
+            # Run the updater
+            subprocess.run(["python", updater_path], startupinfo=startupinfo, check=True, shell=False)
         else:
             main_path = os.path.join(APPDATA, "TLSoftware", "PyInventory", "main.pyw")
             # Verify if the program is installed
             if os.path.exists(main_path):
+                # Create a STARTUPINFO object
+                startupinfo = subprocess.STARTUPINFO()
+
+                # Set the use show window flag
+                startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+
+                # Set the window show state to hidden
+                startupinfo.wShowWindow = subprocess.SW_HIDE
+                
                 # Run the program
-                subprocess.run(["python", main_path], check=True, shell=False)
+                subprocess.run(["python", main_path], startupinfo=startupinfo, check=True, shell=False)
             else:
                 # Show error message
                 messagebox.showerror("Error", "El programa no está instalado en este equipo. Por favor, conéctate a internet para obtener la última versión disponible.")
@@ -38,8 +57,17 @@ def download_file(url, destination):
         main_path = os.path.join(APPDATA, "TLSoftware", "PyInventory", "main.pyw")
         # Verify if the program is installed
         if os.path.exists(main_path):
+            # Create a STARTUPINFO object
+            startupinfo = subprocess.STARTUPINFO()
+
+            # Set the use show window flag
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+
+            # Set the window show state to hidden
+            startupinfo.wShowWindow = subprocess.SW_HIDE
+            
             # Run the program
-            subprocess.run(["python", main_path], check=True, shell=False)
+            subprocess.run(["python", main_path], startupinfo=startupinfo, check=True, shell=False)
         else:
             # Show error message
             messagebox.showerror("Error", "El programa no está instalado en este equipo. Por favor, conéctate a internet para obtener la última versión disponible.")
@@ -54,8 +82,17 @@ if check_internet_connection():
 else:
      # Verify if the program is installed
         if os.path.exists(main_path):
+            # Create a STARTUPINFO object
+            startupinfo = subprocess.STARTUPINFO()
+
+            # Set the use show window flag
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+
+            # Set the window show state to hidden
+            startupinfo.wShowWindow = subprocess.SW_HIDE
+            
             # Run the program
-            subprocess.run(["python", main_path], check=True, shell=False)
+            subprocess.run(["python", main_path], startupinfo=startupinfo, check=True, shell=False)
         else:
             # Show error message
             messagebox.showerror("Error", "El programa no está instalado en este equipo. Por favor, conéctate a internet para obtener la última versión disponible.")

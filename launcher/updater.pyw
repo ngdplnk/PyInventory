@@ -1,10 +1,3 @@
-######################################## PyInventory Launcher #######################################
-################ This script is the main program loader and updater for PyInventory. ################
-############# It will update the program from GitHub if there is an internet connection. ############
-### If there is no internet connection, it will run the program with the latest version available. ##
-################## If the program is not installed, it will show an error message. ##################
-#####################################################################################################
-
 # MODULES
 import os
 import requests
@@ -20,6 +13,21 @@ def check_internet_connection():
         requests.get("http://www.github.com", timeout=3)
         return True
     except requests.ConnectionError:
+        return False
+    
+# MODULE INSTALLER
+def install_module(module):
+    try:
+        subprocess.run(["pip", "install", module], shell=False)
+    except subprocess.CalledProcessError:
+        messagebox.showerror("Error", "Error al instalar módulo. Intentando usar módulo ya instalado.")
+
+# CHECK MODULES
+def is_module_installed(module_name):
+    try:
+        __import__(module_name)
+        return True
+    except ImportError:
         return False
 
 # Update program from GitHub
@@ -41,45 +49,61 @@ def download_file(url, destination):
         # Verify if the program is installed
         if os.path.exists(file_name):
             # Run the program
-            subprocess.run(["python", file_name], check=True)
+            subprocess.run(["python", file_name], check=True, shell=False)
         else:
             # Show error message
             messagebox.showerror("Error", "El programa no está instalado en este equipo. Por favor, conéctate a internet para obtener la última versión disponible.")
 
+# Check modules
+if not is_module_installed("requests"):
+    requests_module = False
+else:
+    requests_module = True
+if not is_module_installed("openpyxl"):
+    openpyxl_module = False
+else:
+    openpyxl_module = True
+if not is_module_installed("pandas"):
+    pandas_module = False
+else:
+    pandas_module = True
+# What to do if theres internet connection or not
+if check_internet_connection():
+    # GitHub URL
+    file_url = "https://raw.githubusercontent.com/ngdplnk/PyInventory/main/release/main.pyw"
 
-# Main function
-def main():
-    # Call check_internet_connection function
-    if check_internet_connection():
-        # GitHub URL
-        file_url = "https://raw.githubusercontent.com/ngdplnk/PyInventory/main/release/main.pyw"
-
-        # Install path and file name
-        install_name = os.path.join(APPDATA, "TLSoftware", "PyInventory")
-        assets_folder = os.path.join(install_name, "assets")
-        os.makedirs(assets_folder, exist_ok=True)
+    # Install path and file name
+    install_name = os.path.join(APPDATA, "TLSoftware", "PyInventory")
+    assets_folder = os.path.join(install_name, "assets")
+    os.makedirs(assets_folder, exist_ok=True)
         
-        file_name = os.path.join(install_name, "main.pyw")
+    file_name = os.path.join(install_name, "main.pyw")
 
-        # Download file from GitHub
-        download_file(file_url, file_name)
+    # Download file from GitHub
+    download_file(file_url, file_name)
+
+    # Install modules
+    if not requests_module:
+        install_module("requests")
+    if not openpyxl_module:
+        install_module("openpyxl")
+    if not pandas_module:
+        install_module("pandas")
         
-        # Run the program
-        subprocess.run(["python", file_name], check=True)
+    # Run the program
+    subprocess.run(["python", file_name], check=True, shell=False)
+else:
+    # Check if all the modules are installed
+    if not requests_module or not openpyxl_module or not pandas_module:
+        messagebox.showerror("Error", "No tienes acceso a internet y no tienes instalados los módulos necesarios. Por favor, conéctate a internet y reinicia el programa.")
     else:
-        # Get the program files path
-        program_files_path = os.environ.get("APPDATA")
-
         # File path
         file_name = os.path.join(APPDATA, "TLSoftware", "PyInventory", "main.pyw")
 
         # Verify if the program is installed
         if os.path.exists(file_name):
             # Run the program
-            subprocess.run(["python", file_name], check=True)
+            subprocess.run(["python", file_name], check=True, shell=False)
         else:
             # Show error message
             messagebox.showerror("Error", "El programa no está instalado en este equipo. Por favor, conéctate a internet para obtener la última versión disponible.")
-
-if __name__ == "__main__":
-    main()

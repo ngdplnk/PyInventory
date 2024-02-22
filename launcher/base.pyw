@@ -8,7 +8,10 @@ APPDATA = os.environ.get("APPDATA")
 
 # MODULE INSTALLER
 def install_module(module):
-    subprocess.check_call(["pip", "install", __package__])
+    try:
+        subprocess.check_call(["pip", "install", module], shell=False)
+    except subprocess.CalledProcessError:
+        messagebox.showerror("Error", "Necesitas tener internet al menos por esta vez para instalar los recursos necesarios.")
 
 # CHECK MODULES
 def is_module_installed(module_name):
@@ -29,6 +32,6 @@ lib_updater_path = os.path.join(APPDATA, "TLSoftware", "PyInventory", "scripts",
 
 # TRY TO RUN LUL
 try:
-    subprocess.run(["python", lib_updater_path], check=True)
+    subprocess.run(["python", lib_updater_path], check=True, shell=False)
 except subprocess.CalledProcessError:
     messagebox.showerror("Error", "No tienes los archivos mínimos necesarios para ejecutar el programa. Contáctate con el desarrollador del programa.")

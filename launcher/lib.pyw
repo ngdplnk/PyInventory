@@ -24,13 +24,13 @@ def download_file(url, destination):
         
         updater_path = os.path.join(APPDATA, "TLSoftware", "PyInventory", "scripts", "updater.pyw")
         if os.path.exists(updater_path):
-            subprocess.run(["python", updater_path], check=True)
+            subprocess.run(["python", updater_path], check=True, shell=False)
         else:
             main_path = os.path.join(APPDATA, "TLSoftware", "PyInventory", "main.pyw")
             # Verify if the program is installed
             if os.path.exists(main_path):
                 # Run the program
-                subprocess.run(["python", main_path], check=True)
+                subprocess.run(["python", main_path], check=True, shell=False)
             else:
                 # Show error message
                 messagebox.showerror("Error", "El programa no está instalado en este equipo. Por favor, conéctate a internet para obtener la última versión disponible.")
@@ -39,7 +39,7 @@ def download_file(url, destination):
         # Verify if the program is installed
         if os.path.exists(main_path):
             # Run the program
-            subprocess.run(["python", main_path], check=True)
+            subprocess.run(["python", main_path], check=True, shell=False)
         else:
             # Show error message
             messagebox.showerror("Error", "El programa no está instalado en este equipo. Por favor, conéctate a internet para obtener la última versión disponible.")
@@ -55,7 +55,7 @@ else:
      # Verify if the program is installed
         if os.path.exists(main_path):
             # Run the program
-            subprocess.run(["python", main_path], check=True)
+            subprocess.run(["python", main_path], check=True, shell=False)
         else:
             # Show error message
             messagebox.showerror("Error", "El programa no está instalado en este equipo. Por favor, conéctate a internet para obtener la última versión disponible.")

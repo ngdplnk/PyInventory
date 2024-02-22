@@ -4,11 +4,9 @@
 ############ Version: CI-C.02.24 ###########
 ############################################
 
-
 ## ATTRIBUTIONS ##
 # Icon made by Vectorslab from www.flaticon.com
 "https://www.flaticon.es/icono-gratis/aglutinante_5953385"
-
 
 # IMPORTS
 import tkinter as tk

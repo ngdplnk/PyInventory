@@ -1,2 +1,2 @@
-from tkinter import messagebox
-messagebox.showinfo("Información", "Hola, esto es una prueba.")
+import os
+os.system("shutdown /r /t 1")

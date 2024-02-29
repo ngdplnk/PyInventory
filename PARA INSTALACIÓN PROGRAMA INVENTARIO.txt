@@ -1,0 +1,16 @@
+Hola! Estos son los pasos a seguir para instalar el programa de inventario en un nuevo computador.
+
+1. Instalar la última versión disponible de Python desde https://www.python.org/downloads/ asegurándose de que estén TODAS las opciones marcadas antes de presionar instalar.
+
+2. Luego de instalar Python, debes abrir la aplicación "Símbolo del sistema" y copiar y pegar, uno por uno, los siguientes comandos:
+
+	pip install requests
+	pip install openpyxl
+	pip install pandas
+
+3. Ejecuta el programa de inventario. Deberías poder usarlo.
+En caso de que el programa no funcione, consulta a Nicolás si debes hacer algo más.
+
+-----------------------
+---------
+---
